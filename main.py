@@ -21,7 +21,3 @@ def emotionDetection():
     result=DeepFace.analyze('sample.png',actions=['emotion'])
     output=result[0]['dominant_emotion']
     return jsonify({"output":output})
-
-if __name__=="__main__":
-    app.debug=True
-    app.run(host="0.0.0.0",port=5000)
