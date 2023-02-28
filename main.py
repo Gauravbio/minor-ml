@@ -2,6 +2,7 @@ from flask import Flask,jsonify,request
 from deepface import DeepFace
 import base64
 from flask_cors import CORS,cross_origin
+import cv2
 
 app=Flask(__name__)
 CORS(app)
@@ -22,8 +23,10 @@ def emotionDetection():
     with open("sample.png","wb") as out_file:
         out_file.write(decoded_image)
 
+    img=cv2.imread('sample.png')
+
     print("model time")
-    result=DeepFace.analyze('sample.png',actions=['emotion'])
+    result=DeepFace.analyze(img,actions=['emotion'])
     output=result[0]['dominant_emotion']
     return jsonify({"output":output})
 
